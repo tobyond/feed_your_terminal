@@ -10,6 +10,7 @@ class Feed < Thor
     not_read = FeedMethods.new.not_read
     return puts set_color("***** feed is empty *****", :red, :on_white) if not_read.empty?
 
+    system("clear")
     line_number = 0
     puts (line_number+=1).to_s.ljust(6) + set_color("class", :magenta, :bold) + " " + set_color("RSSFeed", :cyan, :bold)
     not_read.map do |rss|
