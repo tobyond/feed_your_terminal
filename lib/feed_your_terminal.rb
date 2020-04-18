@@ -7,6 +7,7 @@ require "core_extensions/string/snake"
 
 module FeedYourTerminal
   class Error < StandardError; end
+  class IncorrectRSSFormatError < StandardError; end
 end
 
 String.include CoreExtensions::String::Snake

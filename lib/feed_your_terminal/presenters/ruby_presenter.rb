@@ -7,6 +7,8 @@ module Presenters
       def present(feed)
         return unless feed.is_a?(Array)
 
+        raise FeedYourTerminal::IncorrectRSSFormatError unless feed.all? { |x| x.respond_to?(:title) && x.respond_to?(:link) }
+
         line_number = 0
         puts (line_number+=1).to_s.ljust(6) + color.set_color("class", :magenta, :bold) + " " + color.set_color("RSSFeed", :cyan, :bold)
         feed.map do |rss|
