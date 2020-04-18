@@ -10,22 +10,45 @@ Why not?
 
 ## Usage
 
-clone the gem, cd into directory.
-run in the directory:
+Certain assumptions, you have git, and ruby 2.3+ on your system.
+The following instructions work for a unix based operating system, Mac OS, linux etc. May work in windows YMMV.
+
+
+clone the gem:
 
 ```
-# to see all commands
-bundle exec bin/feed.rb
+git clone git@github.com:tobyond/feed_your_terminal.git
+```
 
-# to add link to your rss feed
-bundle exec bin/feed.rb add_link https://my-feed.com/rss
+cd into the gem directory:
+
+```
+cd feed_your_terminal/
+```
+
+install the gem in your system:
+
+```
+bundle exec rake install:local
+
+```
+
+then you'll have the following commands:
+
+```
+
+# to see all commands
+feed
+
+# to add link to your rss feed (this must be done first after above installation, before all other feed commands)
+feed add_link https://my-feed.com/rss
 
 # to remove_link from your rss feed
-bundle exec bin/feed.rb remove_link https://my-feed.com/rss
+feed remove_link https://my-feed.com/rss
 
 # to get all your unread feeds
-bundle exec bin/feed.rb unread
+feed unread
 
 # to mark all your unread feeds as read
-bundle exec bin/feed.rb mark_all_as_read
+feed mark_all_as_read
 ```

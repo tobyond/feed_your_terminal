@@ -1,0 +1,43 @@
+#!/usr/bin/env ruby
+
+require 'feed_your_terminal'
+require 'thor'
+class Feed < Thor
+  package_name "Feed"
+
+  desc "unread", "Unread items in feed"
+  def unread
+    feed = FeedMethods.new.not_read
+    return puts set_color("***** feed is empty *****", :red, :on_white) if feed.empty?
+
+    system("clear")
+    Presenters::RubyPresenter.present(feed)
+  end
+
+  desc "mark_all_as_read", "Mark all viewed items as read"
+  def mark_all_as_read
+    unread_count = Db.unread_guid_count
+    puts set_color("#{unread_count} items have been marked read", :yellow) if Db.mark_feed_read
+  end
+
+  desc "all_links", "all links you have subscribed to"
+  def all_links
+    puts Db.all_links
+  end
+
+  desc "add_link URL", "add link added to the to your feed one at a time"
+  def add_link(link)
+    puts "++#{set_color(link, :blue)} added to you feeds" if Db.add_link(link)
+  end
+
+  desc "remove_link URL", "remove link added to the to your feed one at a time"
+  def remove_link(link)
+    puts "--#{set_color(link, :red)} removed from your feeds" if Db.remove_link(link)
+  end
+
+  no_commands do
+  end
+
+end
+
+Feed.start(ARGV)
